@@ -1,4 +1,5 @@
 const request = require('request-promise');
+const Station = require('./Station');
 
 const PANDORA_URL = 'https://www.pandora.com';
 const API_URL = `${PANDORA_URL}/api`;
@@ -36,10 +37,11 @@ class PandoraClient {
   }
 
   async listStations(pageSize = 250, startIndex = 0) {
-    return this.pandoraRequest('/v1/station/getStations', {
+    const stations = (await this.pandoraRequest('/v1/station/getStations', {
       pageSize,
       startIndex,
-    });
+    })).stations.map(stationData => new Station(stationData));
+    return stations;
   }
 
   async getPlaylist(stationId) {
