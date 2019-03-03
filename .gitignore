@@ -4,6 +4,10 @@ test/PandoraCredentials.json
 # Webstorm
 .idea
 
+# Coverage Reports
+.nyc_output
+coverage
+
 # Logs
 logs
 *.log

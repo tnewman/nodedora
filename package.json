@@ -4,7 +4,7 @@
   "description": "Web-Based Pandora Player",
   "main": "index.js",
   "scripts": {
-    "test": "mocha && eslint ."
+    "test": "nyc --reporter=lcov mocha && eslint ."
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0"
   }
 }
