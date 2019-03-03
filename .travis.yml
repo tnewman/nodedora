@@ -6,6 +6,7 @@ addons:
     repo_token: jMt2mhqfAqpBTIqr7/+mCuBWEHHm2v4l+bsR4hICC+o0fiY0ac6thDnlhrsHBGOUK6QSmX1mVSAe5rYh/krwAFiWXgNJpC7q3NUhKn8tnLyzn1Jvs4kNqVAqL7D75dhYSAHBqgNFM8lvrCgHw4RXi+ceaMH2TKL12TUIyHoTJsZCq3JDjFkITCvAvU8dxdikLxkvKGXZ8cP/Q21dxvoqhxrJCnOEq78Sv9B/r07ABqAK4i2AQ/TPsGO1SUFLc9NfcrIUEv2zTfl8vIpEXY4+L+JwYoZOY9IsupNtYC2rq+yXAoqFNvWh13EyINlec7JM5YHezQkWkLEMgXbMzYeHpfaPcIyrtbupsCHqxtcsUXJRQoOTc/4eGTwolZaqyPjxFrsa6S5fGrwVPA8dPI7GEsRVHODN+H03DyWSIb9j1cMOLKsu6O23v7yTj7S0Z7y8PQQsTtRMrI0PIap4xks37ZBZGY1twmL2LZzyajUs+3ge2IXeZ4gMyY05nKqPJ3lYEt5M2ON6Cx+cGtXm8g5EmTUMfpnTNBC8YR7hnMH4T3SLKpJGKT59bjpjZva8tltegFeiNFvo5kh05snEyoBuGuE5Mot6E0P451OBjn4MxyGh6hbBfx1t4+JCr7ORWcWvvq9FxJ55yinOzM26H/+tXFYGRYF+kdaaL9YTRhO7Jjg=
 before_script:
   - openssl aes-256-cbc -K $encrypted_151ea4390417_key -iv $encrypted_151ea4390417_iv -in test/PandoraCredentials.json.enc -out test/PandoraCredentials.json -d
+  - npm install codeclimate-test-reporter -g
   - npm install
 script:
   npm test
