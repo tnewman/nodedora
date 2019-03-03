@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const Station = require('./Station');
+const Track = require('./Track');
 
 const PANDORA_URL = 'https://www.pandora.com';
 const API_URL = `${PANDORA_URL}/api`;
@@ -37,19 +38,18 @@ class PandoraClient {
   }
 
   async listStations(pageSize = 250, startIndex = 0) {
-    const stations = (await this.pandoraRequest('/v1/station/getStations', {
+    return (await this.pandoraRequest('/v1/station/getStations', {
       pageSize,
       startIndex,
     })).stations.map(stationData => new Station(stationData));
-    return stations;
   }
 
   async getPlaylist(stationId) {
     await this.resumePlayback();
-    return this.pandoraRequest('/v1/playlist/getFragment', {
+    return (await this.pandoraRequest('/v1/playlist/getFragment', {
       stationId,
       isStationStart: false,
-    });
+    })).tracks.map(trackData => new Track(trackData));
   }
 
   async setCsrfToken() {

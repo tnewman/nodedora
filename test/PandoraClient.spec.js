@@ -1,7 +1,6 @@
 const { assert } = require('./chai');
 const PandoraClient = require('../src/PandoraClient');
 const PandoraCredentials = require('./PandoraCredentials');
-const Station = require('../src/Station');
 
 describe('Pandora Client', async () => {
   const pandoraClient = new PandoraClient(PandoraCredentials.username, PandoraCredentials.password);
@@ -40,12 +39,18 @@ describe('Pandora Client', async () => {
 
   it('should display the list of current stations', async () => {
     const stations = await pandoraClient.listStations();
-    assert.ok(stations);
+    const [station] = stations;
+    assert.ok(station.stationId);
+    assert.ok(station.name);
   });
 
   it('should display the playlist for a station', async () => {
     const stations = await pandoraClient.listStations();
-    const songs = await pandoraClient.getPlaylist(stations[0].stationId);
-    assert.ok(songs);
+    const tracks = await pandoraClient.getPlaylist(stations[0].stationId);
+    const [track] = tracks;
+    assert.ok(track.artistName);
+    assert.ok(track.artistName);
+    assert.ok(track.songTitle);
+    assert.ok(track.audioURL);
   });
 });
