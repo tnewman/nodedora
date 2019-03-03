@@ -28,7 +28,13 @@ describe('Pandora Client', async () => {
     pandoraClientNotLoggedIn.csrfToken = null;
     pandoraClientNotLoggedIn.authToken = null;
 
-    assert.throws(pandoraClientNotLoggedIn.checkLogin.bind(), Error);
+    try {
+      pandoraClientNotLoggedIn.checkLogin();
+    } catch (e) {
+      return;
+    }
+
+    assert.fail();
   });
 
   it('should display the list of current stations', async () => {
