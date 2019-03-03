@@ -1,10 +1,8 @@
 language: node_js
 node_js:
 - 10.15.2
-addons:
-  code_climate:
-    repo_token:
-      secure: kzzq1b0U5s06vOLkjKSMkWQl7H+Kd+dbXl4B446X7fBp0H1qCpdRPgiAInEH5h1VRjura4290ooZH2f4vY6rUTFKZB+mNmrgrmst22tMgAt/LcxSWFRr3miX7Vt3Gnc0AZ48tGV+ET0tPDRYYWqJI4jTlaJHrf9tGBgUEuNgS0344qJ8O/9XigM+j4VZK4dZFomTgdLMYkEs5ul5lLLHsM/+w790A7hDRL0S86w+JjnMnUFekm9XCIQbdTcJHroZGIQX8zSlPMmyu2d0V85uK5m79DWZCoxQLuUO94H8tI4UawZnBQjs3kcUwCzudhnBHi3xP+UCfK5qQyHcxLxXdlGY1LmdcC+be8LHWTP56mrJjXMwcYHJEjVLlUBCQeeBi3qe1NPvggxvXxVejTp7gdrxKZ+dfX5Knv70HZFROaNtTsaFJfI5dVSfS0bDESHF0THjst94RWHbnCqpHZj6cOZP7pKgfrICBiErKHkeKLlEHW8B/voKm/R6Ob9gRaM+6sTMHg0xU+W/S56nTCF/sV+HzXV/R8uS6BRCNXHSeqo+W3NP9QgdVrXs5npuatUFj2NCN8imUCSOleXhx1iQByPyCdyw4lgm7Xz3K2u3g7wD6LaHp/oTp9/OLw0Cm1SMtmjWvhw5D7c+fnGSA9ZVR7DPMgfJan2iuBqHn7dFNMU=
+env:
+  secure: NuIVY1u/+grcxnm9SA7/wvp6AjyryKFTEp9wRRyfv12EM2XcDTPdjb+mdVHiRF0X4rUBD/onZrEVZ4E9oOPfnIQ6WbR2qjk66k0j6NYSOWpCSgjlEuSPGGKY3VHX9QFqgvaE7jvBjG+NNWQ5APqjCLFewvxfOwAOjX1RGFfwWXhPg/8/qKKqUSWR41g9gAmuiXwSERlvQf6MWi29FHpRZyvlRsHoR1pizPUWY2zW4Lh8bdUHBXWD7lalaEb7Nl+H6JDN3bdBbO0ygGLjbzoy8kaToO7O4fJ8mmTFet6d7jxivXqeE5Xt7wccrwA3kuT9nyMca3CFTGdQjTdatT3XPf1ookcz4n+uuhWMGO4zC/Ynpd9iW4+5PV/vC+uKcc4XE15sjLuleJ1AXm85SRuryhP+LF8GgyyZtmo1b3I3P36AQVOw0WcokgYnRKHDfInT6NcyTlf7MkZZCnvqkslM3WdwLAAv3IysDXHac6q6UTN8y30SKHqGP59imOwqO82WBnwV6KgmAcSa7Xh6wnE3gGZBjstV+UNEzBJG/5Jd8Tcp36vwIFmdtrviGUCtk8S3/bV1l2A4xOMlDJAwh69lQBiZRoAKPss5QiahGjutjQ9ozEUmPHbM5ykr0vgJouwp0deUpqq/gcyebCfgj/pH6s4TcoJiOKQSZv6yBgWEn14=
 before_script:
 - openssl aes-256-cbc -K $encrypted_151ea4390417_key -iv $encrypted_151ea4390417_iv -in test/PandoraCredentials.json.enc -out test/PandoraCredentials.json -d
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -12,7 +10,6 @@ before_script:
 - ./cc-test-reporter before-build
 install:
 - npm install
-script:
-  npm test
+script: npm test
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
