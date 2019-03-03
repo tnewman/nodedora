@@ -1,21 +1,44 @@
+const { assert } = require('./chai');
 const PandoraClient = require('../src/PandoraClient');
+const PandoraCredentials = require('./PandoraCredentials');
 
-describe('Pandora Client', () => {
-  const pandoraClient = new PandoraClient();
+describe('Pandora Client', async () => {
+  const pandoraClient = new PandoraClient(PandoraCredentials.username, PandoraCredentials.password);
 
-  it('should authenticate with valid credentials', () => {
-
+  before(async () => {
+    await pandoraClient.login();
   });
 
-  it('should throw an exception with invalid credentials', () => {
-
+  it('should authenticate with valid credentials', async () => {
+    await pandoraClient.login();
   });
 
-  it('should display the list of current stations', () => {
-
+  it('should throw an exception with invalid credentials', async () => {
+    const pandoraClientBadCredentials = new PandoraClient('bad', 'bad');
+    await assert.isRejected(pandoraClientBadCredentials.login());
   });
 
-  it('should display the list of songs for the current station', () => {
+  it('should throw an exception when not logged in', async () => {
+    const pandoraClientNotLoggedIn = new PandoraClient(
+      PandoraCredentials.username,
+      PandoraCredentials.password,
+    );
 
+    pandoraClientNotLoggedIn.cookie = null;
+    pandoraClientNotLoggedIn.csrfToken = null;
+    pandoraClientNotLoggedIn.authToken = null;
+
+    assert.throws(pandoraClientNotLoggedIn.checkLogin);
+  });
+
+  it('should display the list of current stations', async () => {
+    const stations = await pandoraClient.listStations();
+    assert.ok(stations);
+  });
+
+  it('should display the playlist for a station', async () => {
+    const { stations } = await pandoraClient.listStations();
+    const songs = await pandoraClient.getPlaylist(stations[0].stationId);
+    assert.ok(songs);
   });
 });
