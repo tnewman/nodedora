@@ -4,7 +4,7 @@
   "description": "Web-Based Pandora Player",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=lcov mocha && eslint ."
+    "test": "nyc --reporter=lcov mocha --recursive && eslint ."
   },
   "repository": {
     "type": "git",

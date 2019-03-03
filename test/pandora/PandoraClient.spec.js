@@ -1,6 +1,6 @@
-const { assert } = require('./chai');
-const PandoraClient = require('../src/PandoraClient');
-const PandoraCredentials = require('./PandoraCredentials');
+const { assert } = require('../chai');
+const PandoraClient = require('../../src/pandora/PandoraClient');
+const PandoraCredentials = require('../PandoraCredentials');
 
 describe('Pandora Client', async () => {
   const pandoraClient = new PandoraClient(PandoraCredentials.username, PandoraCredentials.password);
