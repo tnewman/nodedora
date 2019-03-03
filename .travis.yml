@@ -1,14 +1,18 @@
 language: node_js
 node_js:
-  - "10.15.2"
+- 10.15.2
 addons:
   code_climate:
-    repo_token: jMt2mhqfAqpBTIqr7/+mCuBWEHHm2v4l+bsR4hICC+o0fiY0ac6thDnlhrsHBGOUK6QSmX1mVSAe5rYh/krwAFiWXgNJpC7q3NUhKn8tnLyzn1Jvs4kNqVAqL7D75dhYSAHBqgNFM8lvrCgHw4RXi+ceaMH2TKL12TUIyHoTJsZCq3JDjFkITCvAvU8dxdikLxkvKGXZ8cP/Q21dxvoqhxrJCnOEq78Sv9B/r07ABqAK4i2AQ/TPsGO1SUFLc9NfcrIUEv2zTfl8vIpEXY4+L+JwYoZOY9IsupNtYC2rq+yXAoqFNvWh13EyINlec7JM5YHezQkWkLEMgXbMzYeHpfaPcIyrtbupsCHqxtcsUXJRQoOTc/4eGTwolZaqyPjxFrsa6S5fGrwVPA8dPI7GEsRVHODN+H03DyWSIb9j1cMOLKsu6O23v7yTj7S0Z7y8PQQsTtRMrI0PIap4xks37ZBZGY1twmL2LZzyajUs+3ge2IXeZ4gMyY05nKqPJ3lYEt5M2ON6Cx+cGtXm8g5EmTUMfpnTNBC8YR7hnMH4T3SLKpJGKT59bjpjZva8tltegFeiNFvo5kh05snEyoBuGuE5Mot6E0P451OBjn4MxyGh6hbBfx1t4+JCr7ORWcWvvq9FxJ55yinOzM26H/+tXFYGRYF+kdaaL9YTRhO7Jjg=
+    repo_token:
+      secure: kzzq1b0U5s06vOLkjKSMkWQl7H+Kd+dbXl4B446X7fBp0H1qCpdRPgiAInEH5h1VRjura4290ooZH2f4vY6rUTFKZB+mNmrgrmst22tMgAt/LcxSWFRr3miX7Vt3Gnc0AZ48tGV+ET0tPDRYYWqJI4jTlaJHrf9tGBgUEuNgS0344qJ8O/9XigM+j4VZK4dZFomTgdLMYkEs5ul5lLLHsM/+w790A7hDRL0S86w+JjnMnUFekm9XCIQbdTcJHroZGIQX8zSlPMmyu2d0V85uK5m79DWZCoxQLuUO94H8tI4UawZnBQjs3kcUwCzudhnBHi3xP+UCfK5qQyHcxLxXdlGY1LmdcC+be8LHWTP56mrJjXMwcYHJEjVLlUBCQeeBi3qe1NPvggxvXxVejTp7gdrxKZ+dfX5Knv70HZFROaNtTsaFJfI5dVSfS0bDESHF0THjst94RWHbnCqpHZj6cOZP7pKgfrICBiErKHkeKLlEHW8B/voKm/R6Ob9gRaM+6sTMHg0xU+W/S56nTCF/sV+HzXV/R8uS6BRCNXHSeqo+W3NP9QgdVrXs5npuatUFj2NCN8imUCSOleXhx1iQByPyCdyw4lgm7Xz3K2u3g7wD6LaHp/oTp9/OLw0Cm1SMtmjWvhw5D7c+fnGSA9ZVR7DPMgfJan2iuBqHn7dFNMU=
 before_script:
-  - openssl aes-256-cbc -K $encrypted_151ea4390417_key -iv $encrypted_151ea4390417_iv -in test/PandoraCredentials.json.enc -out test/PandoraCredentials.json -d
-  - npm install codeclimate-test-reporter -g
-  - npm install
+- openssl aes-256-cbc -K $encrypted_151ea4390417_key -iv $encrypted_151ea4390417_iv -in test/PandoraCredentials.json.enc -out test/PandoraCredentials.json -d
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
+install:
+- npm install
 script:
   npm test
 after_script:
-  - codeclimate-test-reporter < ./coverage/lcov.info
+- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
