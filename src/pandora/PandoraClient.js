@@ -52,6 +52,12 @@ class PandoraClient {
     })).tracks.map(trackData => new Track(trackData));
   }
 
+  async trackStarted(trackToken) {
+    await this.pandoraRequest('/v1/station/trackStarted', {
+      trackToken,
+    });
+  }
+
   async setCsrfToken() {
     const response = await request({
       method: 'HEAD',

@@ -52,5 +52,14 @@ describe('Pandora Client', async () => {
     assert.ok(track.artistName);
     assert.ok(track.songTitle);
     assert.ok(track.audioURL);
+    assert.ok(track.trackToken);
+  });
+
+  it('should report track started', async () => {
+    const stations = await pandoraClient.listStations();
+    const tracks = await pandoraClient.getPlaylist(stations[0].stationId);
+    const [track] = tracks;
+
+    await pandoraClient.trackStarted(track.trackToken);
   });
 });
