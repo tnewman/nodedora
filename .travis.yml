@@ -6,7 +6,7 @@ node_js:
 env:
   secure: NuIVY1u/+grcxnm9SA7/wvp6AjyryKFTEp9wRRyfv12EM2XcDTPdjb+mdVHiRF0X4rUBD/onZrEVZ4E9oOPfnIQ6WbR2qjk66k0j6NYSOWpCSgjlEuSPGGKY3VHX9QFqgvaE7jvBjG+NNWQ5APqjCLFewvxfOwAOjX1RGFfwWXhPg/8/qKKqUSWR41g9gAmuiXwSERlvQf6MWi29FHpRZyvlRsHoR1pizPUWY2zW4Lh8bdUHBXWD7lalaEb7Nl+H6JDN3bdBbO0ygGLjbzoy8kaToO7O4fJ8mmTFet6d7jxivXqeE5Xt7wccrwA3kuT9nyMca3CFTGdQjTdatT3XPf1ookcz4n+uuhWMGO4zC/Ynpd9iW4+5PV/vC+uKcc4XE15sjLuleJ1AXm85SRuryhP+LF8GgyyZtmo1b3I3P36AQVOw0WcokgYnRKHDfInT6NcyTlf7MkZZCnvqkslM3WdwLAAv3IysDXHac6q6UTN8y30SKHqGP59imOwqO82WBnwV6KgmAcSa7Xh6wnE3gGZBjstV+UNEzBJG/5Jd8Tcp36vwIFmdtrviGUCtk8S3/bV1l2A4xOMlDJAwh69lQBiZRoAKPss5QiahGjutjQ9ozEUmPHbM5ykr0vgJouwp0deUpqq/gcyebCfgj/pH6s4TcoJiOKQSZv6yBgWEn14=
 before_install:
-- sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+- sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
 - sudo apt-get update
 - sudo apt-get install -y ffmpeg libsdl2-2.0 build-essential cmake ninja-build libavutil-dev libswresample-dev libavdevice-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev
 before_script:
