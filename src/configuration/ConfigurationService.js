@@ -17,9 +17,7 @@ module.exports = class ConfigurationService {
     const configuration = JSON.parse(await this.get(CONFIGURATION_KEY));
 
     if (configuration === null) {
-      return Configuration.fromJSON({
-        stationId: '0',
-      });
+      return null;
     }
 
     return Configuration.fromJSON(configuration);
