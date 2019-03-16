@@ -5,6 +5,10 @@ const ConfigurationService = require('../../src/configuration/ConfigurationServi
 describe('Configuration Service', () => {
   const configurationService = new ConfigurationService();
 
+  after(async () => {
+    await configurationService.quit();
+  });
+
   it('should save and load a configuration', async () => {
     const configuration = new Configuration({
       stationId: '5',

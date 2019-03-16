@@ -10,6 +10,7 @@ module.exports = class ConfigurationService {
     this.get = util.promisify(this.redisClient.get).bind(this.redisClient);
     this.set = util.promisify(this.redisClient.set).bind(this.redisClient);
     this.del = util.promisify(this.redisClient.del).bind(this.redisClient);
+    this.quit = this.redisClient.quit.bind(this.redisClient);
   }
 
   async load() {
