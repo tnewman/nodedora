@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "nodepat": "^0.1.13",
+    "redis": "^2.8.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "request-promise-native": "^1.0.7"
