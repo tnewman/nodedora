@@ -1,7 +1,11 @@
 class Station {
-  constructor(data) {
-    this.stationId = data.stationId;
-    this.name = data.name;
+  constructor(stationId, name) {
+    this.stationId = stationId;
+    this.name = name;
+  }
+
+  static fromJSON(json) {
+    return new Station(json.stationId, json.name);
   }
 }
 

@@ -1,5 +1,9 @@
 module.exports = class Configuration {
-  constructor(data) {
-    this.stationId = data.stationId;
+  constructor(stationId) {
+    this.stationId = stationId;
+  }
+
+  static fromJSON(json) {
+    return new Configuration(json.stationId);
   }
 };

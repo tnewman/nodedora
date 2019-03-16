@@ -21,7 +21,7 @@ describe('Configuration Service', () => {
   it('should load a default configuration', async () => {
     await configurationService.del('nodedora:configuration');
 
-    assert.deepStrictEqual(await configurationService.load(), new Configuration({
+    assert.deepStrictEqual(await configurationService.load(), Configuration.fromJSON({
       stationId: '0',
     }));
   });

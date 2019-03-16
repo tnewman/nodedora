@@ -41,7 +41,7 @@ class PandoraClient {
     return (await this.pandoraRequest('/v1/station/getStations', {
       pageSize,
       startIndex,
-    })).stations.map(stationData => new Station(stationData));
+    })).stations.map(stationData => Station.fromJSON(stationData));
   }
 
   async getPlaylist(stationId) {
@@ -49,7 +49,7 @@ class PandoraClient {
     return (await this.pandoraRequest('/v1/playlist/getFragment', {
       stationId,
       isStationStart: false,
-    })).tracks.map(trackData => new Track(trackData));
+    })).tracks.map(trackData => Track.fromJSON(trackData));
   }
 
   async trackStarted(trackToken) {

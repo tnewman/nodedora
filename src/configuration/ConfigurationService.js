@@ -17,12 +17,12 @@ module.exports = class ConfigurationService {
     const configuration = JSON.parse(await this.get(CONFIGURATION_KEY));
 
     if (configuration === null) {
-      return new Configuration({
+      return Configuration.fromJSON({
         stationId: '0',
       });
     }
 
-    return new Configuration(configuration);
+    return Configuration.fromJSON(configuration);
   }
 
   async save(configuration) {
