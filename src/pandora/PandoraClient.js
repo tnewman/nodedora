@@ -45,7 +45,6 @@ class PandoraClient {
   }
 
   async getPlaylist(stationId) {
-    await this.resumePlayback();
     return (await this.pandoraRequest('/v1/playlist/getFragment', {
       stationId,
       isStationStart: false,

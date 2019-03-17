@@ -45,6 +45,7 @@ describe('Pandora Client', async () => {
   });
 
   it('should display the playlist for a station', async () => {
+    await pandoraClient.resumePlayback();
     const stations = await pandoraClient.listStations();
     const tracks = await pandoraClient.getPlaylist(stations[0].stationId);
     const [track] = tracks;
@@ -56,6 +57,7 @@ describe('Pandora Client', async () => {
   });
 
   it('should report track started', async () => {
+    await pandoraClient.resumePlayback();
     const stations = await pandoraClient.listStations();
     const tracks = await pandoraClient.getPlaylist(stations[0].stationId);
     const [track] = tracks;
