@@ -23,8 +23,23 @@ const PandoraClient = require('./src/pandora/PandoraClient');
   }
 
   while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const playlist = await pandoraClient.getPlaylist(stationId);
+    let playlist;
+
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      playlist = await pandoraClient.getPlaylist(stationId);
+    } catch (e) {
+      if (e.statusCode === 429) {
+        console.log('Resuming playback due to stream violation error.');
+        // eslint-disable-next-line no-await-in-loop
+        await pandoraClient.resumePlayback();
+        // eslint-disable-next-line no-continue
+        continue;
+      } else {
+        throw e;
+      }
+    }
+
     console.log('Retrieved Playlist');
 
     // eslint-disable-next-line no-restricted-syntax, no-await-in-loop
