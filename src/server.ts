@@ -8,13 +8,13 @@ const PORT = 8000;
 
 const server = http.createServer(app.callback());
 
-server.listen(PORT, HOSTNAME, () => {
+server.listen(PORT, HOSTNAME, (): void => {
     logger.info(`nodedora listening on ${HOSTNAME}:${PORT}.`);
 });
 
-const serverClose = () => {
+const serverClose = (): void => {
     logger.info('Shutting down.')
-    server.close((err) => {
+    server.close((err): void => {
         if(err) {
             logger.error(err);
             process.exit(1);
