@@ -17,10 +17,8 @@ const serverClose = (): void => {
     server.close((err): void => {
         if(err) {
             logger.error(err);
-            process.exit(1);
         } else {
             logger.info('Successfully shut down.');
-            process.exit(0);
         }
     });
 };
