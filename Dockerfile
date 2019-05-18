@@ -1,6 +1,7 @@
 FROM node:12-alpine as dependencies
 WORKDIR /opt/nodedora
 ENV NODE_ENV=production
+RUN apk update && apk add cmake ffmpeg ninja && rm -rf /var/cache/apk/*
 COPY package*.json ./
 RUN npm install
 
@@ -17,6 +18,7 @@ RUN npm run build
 
 FROM node:12-alpine as test
 WORKDIR /opt/nodedora
+RUN apk update && apk add ffmpeg && rm -rf /var/cache/apk/*
 COPY --from=devDependencies /opt/nodedora/node_modules ./node_modules
 COPY . ./
 ARG ENV_FILE
@@ -25,6 +27,7 @@ RUN npm run lint
 
 FROM node:12-alpine as run
 WORKDIR /opt/nodedora
+RUN apk update && apk add ffmpeg && rm -rf /var/cache/apk/*
 COPY --from=dependencies /opt/nodedora/node_modules ./node_modules
 COPY --from=build /opt/nodedora/dist ./dist
 USER node
