@@ -6,8 +6,8 @@
   "scripts": {
     "prebuild": "rm -rf dist || rmdir /s /q dist",
     "build": "tsc",
-    "dev": "concurrently \"npm:dev:server\" \"npm:dev:test\"",
-    "dev:server": "ts-node-dev src/server.ts | pino-pretty -c -t",
+    "dev": "concurrently \"npm:dev:start\" \"npm:dev:test\"",
+    "dev:start": "ts-node-dev src/server.ts | pino-pretty -c -t",
     "dev:test": "jest --watchAll",
     "lint": "eslint --ext ts .",
     "start": "ts-node ./src/server.ts",
