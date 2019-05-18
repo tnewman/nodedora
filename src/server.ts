@@ -1,3 +1,5 @@
+import './env';
+
 import app from './app';
 import http from 'http';
 import logger from './logger';
@@ -8,13 +10,13 @@ const PORT = 8000;
 
 const server = http.createServer(app.callback());
 
-server.listen(PORT, HOSTNAME, (): void => {
+server.listen(PORT, HOSTNAME, () => {
     logger.info(`nodedora listening on ${HOSTNAME}:${PORT}.`);
 });
 
-const serverClose = (): void => {
+const serverClose = () => {
     logger.info('Shutting down.')
-    server.close((err): void => {
+    server.close((err) => {
         if(err) {
             logger.error(err);
         } else {
