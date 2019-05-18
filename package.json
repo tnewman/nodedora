@@ -4,8 +4,11 @@
   "description": "A web-based Pandora music player",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:test\"",
     "dev:server": "ts-node-dev src/server.ts | pino-pretty -c -t",
-    "lint": "eslint --ext ts ."
+    "dev:test": "jest --watchAll",
+    "lint": "eslint --ext ts .",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,7 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
+    "concurrently": "^4.1.0",
     "koa": "^2.7.0",
     "koa-pino-logger": "^2.1.3",
     "koa-router": "^7.4.0",
