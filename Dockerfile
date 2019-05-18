@@ -13,7 +13,7 @@ RUN npm run build
 FROM build as test
 ARG ENV_FILE
 RUN env $(echo $ENV_FILE | tr "\\n" " ") npm run test
-RUN env $(echo $ENV_FILE | tr "\\n" " ") npm run lint
+RUN npm run lint
 
 FROM dependencies as production
 COPY --from=build /opt/nodedora/dist ./dist
