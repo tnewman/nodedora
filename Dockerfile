@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM build as test
 ARG ENV_FILE
-RUN env $(echo $ENV_FILE | tr "\\n" " ") npm run test
+RUN export ${ENV_FILE?} && npm run test
 RUN npm run lint
 
 FROM dependencies as production

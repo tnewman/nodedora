@@ -5,4 +5,4 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_957115598d7c_key -iv $encrypted_957115598d7c_iv
   -in .env.enc -out .env -d
 script:
-- docker build .
+- docker build --build-arg "ENV_FILE=$(cat .env)" -t nodedora .
