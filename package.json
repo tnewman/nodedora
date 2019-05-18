@@ -1,0 +1,44 @@
+{
+  "name": "nodedora",
+  "version": "1.0.0",
+  "description": "A web-based Pandora music player",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "ts-node-dev src/server.ts | pino-pretty -c -t",
+    "lint": "eslint --ext ts ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tnewman/nodedora.git"
+  },
+  "author": "Thomas Newman",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tnewman/nodedora/issues"
+  },
+  "homepage": "https://github.com/tnewman/nodedora#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/koa": "^2.0.48",
+    "@types/koa-pino-logger": "^2.1.4",
+    "@types/koa-router": "^7.0.40",
+    "@types/node": "^12.0.2",
+    "@types/pino": "^5.8.7",
+    "@types/supertest": "^2.0.7",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0",
+    "pino-pretty": "^3.0.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
+    "ts-node-dev": "^1.0.0-pre.39",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-pino-logger": "^2.1.3",
+    "koa-router": "^7.4.0",
+    "pino": "^5.12.5"
+  }
+}
