@@ -4,6 +4,8 @@ import request from 'request-promise-native';
 import logger from '../logger';
 // eslint-disable-next-line no-unused-vars
 import Station from './station';
+// eslint-disable-next-line no-unused-vars
+import Track from './track';
 
 export default class PandoraClient {
     private username: string;
@@ -44,6 +46,48 @@ export default class PandoraClient {
         logger.info(`Retrieved "${stations.length}" Stations from Pandora`);
 
         return stations;
+    }
+
+    async getPlaylist(station: Station): Promise<Track[]> {
+        logger.info(`Retrieving Playlist from Pandora for Station Id "${station.stationId}"`);
+
+        const response = await request({
+            method: 'POST',
+            uri: 'https://www.pandora.com/api/v1/playlist/getFragment',
+            body: {
+                stationId: station.stationId,
+                isStationStart: true,
+                fragmentRequestReason: 'Normal',
+                audioFormat: 'aacplus',
+                startingAtTrackId: null,
+                onDemandArtistMessageAristUidHex: null,
+                onDemandArtistMessageIdHex: null,
+            },
+            headers: this.getHeaders(),
+            json: true,
+        });
+
+        const playlist = <Track[]>response.tracks;
+
+        logger.info(`Retrieved Playlist with "${playlist.length}" Tracks from Pandora for Station Id "${station.stationId}"`);
+
+        return playlist;
+    }
+
+    async resumePlayback() {
+        logger.info('Resuming Playback on Pandora');
+
+        await request({
+            method: 'POST',
+            uri: 'https://www.pandora.com/api/v1/station/playbackResumed',
+            body: {
+                forceActive: true,
+            },
+            headers: this.getHeaders(),
+            json: true,
+        });
+
+        logger.info('Resumed Playback on Pandora');
     }
 
     private async setCSRFToken() {
