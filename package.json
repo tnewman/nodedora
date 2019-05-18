@@ -4,10 +4,13 @@
   "description": "A web-based Pandora music player",
   "main": "index.js",
   "scripts": {
+    "prebuild": "rm -rf dist || rmdir /s /q dist",
+    "build": "tsc",
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:test\"",
     "dev:server": "ts-node-dev src/server.ts | pino-pretty -c -t",
     "dev:test": "jest --watchAll",
     "lint": "eslint --ext ts .",
+    "start": "ts-node ./src/server.ts",
     "test": "jest"
   },
   "repository": {
@@ -35,6 +38,7 @@
     "pino-pretty": "^3.0.0",
     "supertest": "^4.0.2",
     "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.39",
     "typescript": "^3.4.5"
   },
