@@ -1,21 +1,31 @@
 FROM node:12-alpine as dependencies
-ENV NODE_ENV=production
 WORKDIR /opt/nodedora
+ENV NODE_ENV=production
 COPY package*.json ./
 RUN npm install
 
-FROM dependencies as build
+FROM dependencies as devDependencies
+WORKDIR /opt/nodedora
 ENV NODE_ENV=development
 RUN npm install
+
+FROM node:12-alpine as build
+WORKDIR /opt/nodedora
+COPY --from=devDependencies /opt/nodedora/node_modules ./node_modules
 COPY . ./
 RUN npm run build
 
-FROM build as test
+FROM node:12-alpine as test
+WORKDIR /opt/nodedora
+COPY --from=devDependencies /opt/nodedora/node_modules ./node_modules
+COPY . ./
 ARG ENV_FILE
 RUN export ${ENV_FILE?} && npm run test
 RUN npm run lint
 
-FROM dependencies as production
+FROM node:12-alpine as run
+WORKDIR /opt/nodedora
+COPY --from=dependencies /opt/nodedora/node_modules ./node_modules
 COPY --from=build /opt/nodedora/dist ./dist
 USER node
 ENTRYPOINT ["node", "dist/server.js"]
