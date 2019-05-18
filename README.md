@@ -6,7 +6,7 @@ This project is not usable in its current state.
 There is significant further development required.
 
 ## Prerequisites
-- NodeJS 12
+- NodeJS 10 (Upstream libraries do not support NodeJS 12 yet)
 - A Pandora account
 
 ## Environment
