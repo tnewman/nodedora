@@ -11,10 +11,11 @@ COPY . ./
 RUN npm run build
 
 FROM build as test
-RUN npm run test
-RUN npm run lint
+ARG ENV_FILE
+RUN env $(echo $ENV_FILE | tr "\\n" " ") npm run test
+RUN env $(echo $ENV_FILE | tr "\\n" " ") npm run lint
 
 FROM dependencies as production
 COPY --from=build /opt/nodedora/dist ./dist
 USER node
-ENTRYPOINT ["node", "dist/src/server.js"]
+ENTRYPOINT ["node", "dist/server.js"]

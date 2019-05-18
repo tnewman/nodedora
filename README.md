@@ -9,6 +9,11 @@ There is significant further development required.
 - NodeJS 12
 - A Pandora account
 
+## Environment
+Create a `.env` file to configure the application, using 
+`.env.example` as a template. At a minimum, valid Pandora 
+credentials are required. 
+
 ## Development
 - Install Dependencies: `npm i`
 - Run TypeScript Build: `npm run build`
@@ -28,6 +33,6 @@ npm start
 
 ### Docker
 ```bash
-docker build -t nodedora .
-docker run -p8000:8000 nodedora
+docker build --build-arg "ENV_FILE=$(cat .env)" -t nodedora .
+docker run --env-file .env -p8000:8000 nodedora
 ```
