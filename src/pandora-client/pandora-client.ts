@@ -2,6 +2,7 @@ import cookie from 'cookie';
 import request from 'request-promise-native';
 
 import logger from '../logger';
+// eslint-disable-next-line no-unused-vars
 import Station from './station';
 
 export default class PandoraClient {
