@@ -1,4 +1,4 @@
-FROM node:lts-alpine as dependencies
+FROM node:12-alpine as dependencies
 ENV NODE_ENV=production
 WORKDIR /opt/nodedora
 COPY package*.json ./
