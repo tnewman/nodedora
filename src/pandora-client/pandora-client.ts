@@ -41,7 +41,7 @@ export default class PandoraClient {
             json: true,
         });
 
-        const stations = <Station[]>response.stations;
+        const stations = response.stations.map((station: Station) => new Station(station));
 
         logger.info(`Retrieved "${stations.length}" Stations from Pandora`);
 
@@ -67,7 +67,7 @@ export default class PandoraClient {
             json: true,
         });
 
-        const playlist = <Track[]>response.tracks;
+        const playlist = response.tracks.map((track: Track) => new Track(track));
 
         logger.info(`Retrieved Playlist with "${playlist.length}" Tracks from Pandora for Station Id "${station.stationId}"`);
 
