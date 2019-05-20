@@ -1,29 +1,41 @@
 import './env';
 
-import app from './app';
 import http from 'http';
-import logger from './logger';
 import process from 'process';
 
-const HOSTNAME = '0.0.0.0';
-const PORT = 8000;
+import App from './app';
+import Config from './config';
+import logger from './logger';
+import Router from './router';
+import Service from './service';
+import PandoraClient from './pandora-client/pandora-client';
 
-const server = http.createServer(app.callback());
+(async () => {
+    const pandoraClient = await PandoraClient.makePandoraClient(
+        Config.PANDORA_USERNAME,
+        Config.PANDORA_PASSWORD
+    );
 
-server.listen(PORT, HOSTNAME, () => {
-    logger.info(`nodedora listening on ${HOSTNAME}:${PORT}.`);
-});
+    const service = new Service(pandoraClient);
+    const router = new Router(service);
 
-const serverClose = () => {
-    logger.info('Shutting down.')
-    server.close((err) => {
-        if(err) {
-            logger.error(err);
-        } else {
-            logger.info('Successfully shut down.');
-        }
+    const server = http.createServer(new App(router).callback());
+
+    server.listen(Config.PORT, Config.HOSTNAME, () => {
+        logger.info(`nodedora listening on ${Config.HOSTNAME}:${Config.PORT}.`);
     });
-};
 
-process.on('SIGINT', serverClose);
-process.on('SIGTERM', serverClose);
+    const serverClose = () => {
+        logger.info('Shutting down.')
+        server.close((err) => {
+            if(err) {
+                logger.error(err);
+            } else {
+                logger.info('Successfully shut down.');
+            }
+        });
+    };
+
+    process.on('SIGINT', serverClose);
+    process.on('SIGTERM', serverClose);
+})();
