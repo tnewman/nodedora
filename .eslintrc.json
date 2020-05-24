@@ -4,7 +4,7 @@
         "node": true
     },
     "extends": [
-        "airbnb-base"
+        "google"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -12,12 +12,13 @@
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 11,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
+        "no-console": "error"
     }
 }
