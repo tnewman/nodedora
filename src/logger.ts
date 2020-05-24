@@ -1,6 +1,7 @@
 import {AsyncLocalStorage} from 'async_hooks';
 import Koa from 'koa';
 import pino from 'pino';
+import pinoHttp from 'pino-http';
 import {v4 as uuidv4} from 'uuid';
 
 const REQUEST_ID_HEADER = 'X-Request-ID';
@@ -15,10 +16,16 @@ export function koaLogger() {
       requestId,
     });
 
+    const httpLogger = pinoHttp({
+        logger,
+    });
+
     return loggerStorage.run(logger, async () => {
       await next();
 
       ctx.set(REQUEST_ID_HEADER, requestId);
+
+      httpLogger(ctx.req, ctx.res);
     });
   };
 }
