@@ -1,14 +1,18 @@
-import http from 'http';
+import Koa from 'koa';
+import {koaLogger, logger} from './logger';
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const app = new Koa();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+app.use(koaLogger());
+
+app.use((ctx, next) => {
+    logger().info('middleware');
+    return next();
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.use((ctx) => {
+    logger().info('test request');
+    ctx.body = 'test';
 });
+
+app.listen(8000);
